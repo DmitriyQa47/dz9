@@ -1,66 +1,74 @@
 package org.example;
 
 public class Radio {
-    private int currentNumber;
+    private int maxVolume = 10;
+    private int minVolume = 0;
+    private int maxChannel = 9;
+    private int minChannel = 0;
     private int currentVolume;
-    private final int minNum = 0;
-    private final int maxNum = 9;
-    private final int minVol = 0;
-    private final int maxVol = 10;
+    private int currentChannel;
 
-    public int getCurrentNumber() {
-        return currentNumber;
-    }
-
-    public void setCurrentNumber(int newCurrentNumber) { // указываем границы диапазона
-        if (newCurrentNumber < minNum) {
+    public void increaseVolume() {
+        if (currentVolume == maxVolume) {
             return;
         }
-        if (newCurrentNumber > maxNum) {
+        currentVolume++;
+    }
+
+    public void decreaseVolume() {
+        if (currentVolume == minVolume) {
             return;
         }
-        currentNumber = newCurrentNumber;
+        currentVolume--;
     }
 
-    public void nextNumber() {
-        if (currentNumber < maxNum) {
-            currentNumber = currentNumber + 1;
-        } else {
-            currentNumber = minNum; // переход счетчика после 9 на 0
+    public void increaseChannel() {
+        if (currentChannel == maxChannel) {
+            this.currentChannel = minChannel;
+            return;
         }
+        currentChannel++;
     }
 
-    public void prevNumber() {
-        if (currentNumber > minNum) {
-            currentNumber = currentNumber - 1;
-        } else {
-            currentNumber = maxNum; // переход счетчика после 0 на 9
+    public void decreaseChannel() {
+        if (currentChannel == minChannel) {
+            this.currentChannel = maxChannel;
+            return;
         }
+        currentChannel--;
     }
+
 
     public int getCurrentVolume() {
         return currentVolume;
     }
 
-    public void setCurrentVolume(int newCurrentVolume) { // указываем границы диапазона
-        if (newCurrentVolume < minVol) {
-            newCurrentVolume = minVol;
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
+            this.currentVolume = maxVolume;
+            return;
         }
-        if (newCurrentVolume > maxVol) {
-            newCurrentVolume = maxVol;
+        if (currentVolume < minVolume) {
+            this.currentVolume = minVolume;
+            return;
         }
-        currentVolume = newCurrentVolume;
+        this.currentVolume = currentVolume;
     }
 
-    public void increaseVolume() {
-        if (currentVolume < maxVol) {
-            currentVolume = currentVolume + 1;
+
+    public void setCurrentChannel(int currentChannel) {
+        if (currentChannel > maxChannel) {
+
+            return;
         }
+        if (currentChannel < minChannel) {
+
+            return;
+        }
+        this.currentChannel = currentChannel;
     }
 
-    public void decreaseVolume() {
-        if (currentVolume > minVol) {
-            currentVolume = currentVolume - 1;
-        }
+    public int getCurrentChannel() {
+        return currentChannel;
     }
 }
